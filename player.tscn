@@ -21,3 +21,4 @@ shape = SubResource("BoxShape3D_bgq5n")
 [node name="RotationHelper" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="RotationHelper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.698096, 0)
