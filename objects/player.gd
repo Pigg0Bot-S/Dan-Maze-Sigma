@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 
 const SPEED = 1.0
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 7
 const MOUSE_SENSITIVITY = 0.075
 const CAP = 5
 
@@ -10,7 +10,7 @@ const CAP = 5
 @onready var Camera = $RotationHelper/Camera3D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")*2
 var sensitivity_multiplier : Vector2
 var direction : Vector3 = Vector3(0, 0, 0)
 
