@@ -6,26 +6,32 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r752p"]
 height = 2.88022
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bgq5n"]
-size = Vector3(1, 0.0615234, 1)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rp0ga"]
+height = 0.0227714
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_8tt3x")
 
 [node name="BodyCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_r752p")
 
 [node name="FeetCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.38824, 0)
-shape = SubResource("BoxShape3D_bgq5n")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.40962, 0)
+shape = SubResource("CylinderShape3D_rp0ga")
 
 [node name="RotationHelper" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="RotationHelper"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.698096, 0)
+current = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="GUI" parent="SubViewportContainer" instance=ExtResource("2_0t1nb")]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4

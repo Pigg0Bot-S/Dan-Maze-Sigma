@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://di5f7gosa0vpr"]
+
+[ext_resource type="PackedScene" uid="uid://c6uk23j2qyt6" path="res://blends/coin.blend" id="1_jt48b"]
+[ext_resource type="Script" path="res://objects/coin.gd" id="1_p0nf4"]
+[ext_resource type="Script" path="res://objects/coin_spin.gd" id="2_pm8xp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gvcxg"]
+radius = 0.495191
+height = 1.21422
+
+[node name="Coin" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_p0nf4")
+
+[node name="coin" parent="." instance=ExtResource("1_jt48b")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+script = ExtResource("2_pm8xp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_gvcxg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
