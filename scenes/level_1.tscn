@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://h2th1b1222vs"]
+[gd_scene load_steps=9 format=3 uid="uid://h2th1b1222vs"]
 
 [ext_resource type="PackedScene" uid="uid://d2lle8g2bu32v" path="res://player.tscn" id="1_nu457"]
 [ext_resource type="Terrain3DStorage" uid="uid://b1d4vskbdmxi5" path="res://terrain/terrain_storage.res" id="2_lchtv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Terrain3DTextureList" uid="uid://vjincfvo1w30" path="res://terrain/terrain_texture_list.tres" id="4_x0cy1"]
 [ext_resource type="PackedScene" uid="uid://c6uk23j2qyt6" path="res://blends/coin.blend" id="5_4a8w4"]
 [ext_resource type="Script" path="res://objects/coin.gd" id="6_tkk7t"]
+[ext_resource type="PackedScene" uid="uid://ea2vfopby42o" path="res://objects/log.tscn" id="7_hw6bc"]
 
 [sub_resource type="Environment" id="Environment_6gofu"]
 background_mode = 2
@@ -31,5 +32,26 @@ material = ExtResource("3_u4vfc")
 texture_list = ExtResource("4_x0cy1")
 
 [node name="coin" parent="." instance=ExtResource("5_4a8w4")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 6.07773, 1.51194, -7.01659)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 3.25819, 5.42649, -28.336)
 script = ExtResource("6_tkk7t")
+
+[node name="Log" parent="." instance=ExtResource("7_hw6bc")]
+transform = Transform3D(0.589422, 0, -0.807825, 0, 1.91248, 0, 0.807825, 0, 0.589422, 3.25819, 2.40297, -28.336)
+
+[node name="Log2" parent="." instance=ExtResource("7_hw6bc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.65385, 1.18708, -22.2956)
+
+[node name="Log3" parent="." instance=ExtResource("7_hw6bc")]
+transform = Transform3D(0.325073, 0, 0.945689, 0, 1.73513, 0, -0.945689, 0, 0.325073, 0.425529, 1.50613, -25.6115)
+
+[node name="Log4" parent="." instance=ExtResource("7_hw6bc")]
+transform = Transform3D(0.701394, 1.36005, -0.626011, -1.46486e-16, 3.50481, 0.478155, 0.712773, -1.33834, 0.616017, -12.071, 2.19958, -54.0087)
+
+[node name="Log5" parent="." instance=ExtResource("7_hw6bc")]
+transform = Transform3D(-0.23095, -1.85652, 0.854531, 0.501245, 2.7769, 0.514317, -0.833915, 2.18328, 0.0724834, -7.33624, 0.774399, -58.1463)
+
+[node name="Log6" parent="." instance=ExtResource("7_hw6bc")]
+transform = Transform3D(0.282742, -2.65917, -0.689938, 0.641881, 2.65748, -0.380143, 0.712773, -1.33834, 0.616017, 1.93047, 0.449146, -54.5285)
+
+[node name="Log7" parent="." instance=ExtResource("7_hw6bc")]
+transform = Transform3D(0.711842, 2.80272, 0, -0.702339, 2.84065, 0, 0, 0, 1, -3.12561, 1.94755, -55.1909)

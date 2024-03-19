@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmn2jwm3hjwiy"]
+
+[ext_resource type="PackedScene" uid="uid://c6uk23j2qyt6" path="res://blends/coin.blend" id="1_mmk1m"]
+[ext_resource type="Script" path="res://objects/coin.gd" id="2_k16ub"]
+
+[node name="GUI" type="SubViewport"]
+size = Vector2i(852, 480)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+projection = 1
+fov = 90.0
+
+[node name="coin" parent="." instance=ExtResource("1_mmk1m")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, -1.49481)
+script = ExtResource("2_k16ub")

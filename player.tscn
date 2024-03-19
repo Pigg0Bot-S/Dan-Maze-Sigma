@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2lle8g2bu32v"]
+[gd_scene load_steps=5 format=3 uid="uid://d2lle8g2bu32v"]
 
 [ext_resource type="Script" path="res://objects/player.gd" id="1_8tt3x"]
+[ext_resource type="PackedScene" uid="uid://dmn2jwm3hjwiy" path="res://gui.tscn" id="2_0t1nb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r752p"]
 height = 2.88022
@@ -22,3 +23,9 @@ shape = SubResource("BoxShape3D_bgq5n")
 
 [node name="Camera3D" type="Camera3D" parent="RotationHelper"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.698096, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GUI" parent="SubViewportContainer" instance=ExtResource("2_0t1nb")]

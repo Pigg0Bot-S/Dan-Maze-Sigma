@@ -6,6 +6,10 @@ const JUMP_VELOCITY = 7
 const MOUSE_SENSITIVITY = 0.075
 const CAP = 5
 
+const BASE_FOV = 90
+
+var sprint_ready : float = 0
+
 @onready var Rotation_Helper = $RotationHelper
 @onready var Camera = $RotationHelper/Camera3D
 
@@ -20,6 +24,8 @@ func _ready():
 	sensitivity_multiplier = Vector2(DisplayServer.window_get_size())/Vector2(852, 480)
 
 func _physics_process(delta):
+	var fov_mod : float = 0
+	var cap_multi : float = 1
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -27,7 +33,7 @@ func _physics_process(delta):
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
+	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
@@ -35,18 +41,29 @@ func _physics_process(delta):
 	
 	
 	if direction:
+		if Input.is_action_pressed("sprint") and input_dir.y < 0:
+				sprint_ready = clampf(sprint_ready+delta, 0, 0.1)
+				cap_multi = 1.5
 		if not is_on_floor():
 			var old_y = velocity.y
-			velocity = velocity.move_toward(CAP*0.8*direction, SPEED/4)
+			velocity = velocity.move_toward(CAP*0.8*direction*cap_multi, SPEED/4)
 			velocity.y = old_y
 		else:
 			var old_y = velocity.y
-			velocity = velocity.move_toward(CAP*direction, SPEED)
+			velocity = velocity.move_toward(CAP*direction*cap_multi, SPEED)
 			velocity.y = old_y
+			
 	elif is_on_floor():
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	
+	
+	if not Input.is_action_pressed("sprint") or input_dir.y >= 0:
+		sprint_ready = clampf(sprint_ready-2*delta, 0, 0.1)
+	
+	fov_mod += sprint_ready*50
+	Camera.fov = BASE_FOV+fov_mod
+	
 	move_and_slide()
 
 func _input(event):
