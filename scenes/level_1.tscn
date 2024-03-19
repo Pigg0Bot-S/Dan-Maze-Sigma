@@ -1,20 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://h2th1b1222vs"]
+[gd_scene load_steps=8 format=3 uid="uid://h2th1b1222vs"]
 
 [ext_resource type="PackedScene" uid="uid://d2lle8g2bu32v" path="res://player.tscn" id="1_nu457"]
 [ext_resource type="Terrain3DStorage" uid="uid://b1d4vskbdmxi5" path="res://terrain/terrain_storage.res" id="2_lchtv"]
 [ext_resource type="Terrain3DMaterial" uid="uid://dlsc187rl47x6" path="res://terrain/terrain_material.tres" id="3_u4vfc"]
 [ext_resource type="Terrain3DTextureList" uid="uid://vjincfvo1w30" path="res://terrain/terrain_texture_list.tres" id="4_x0cy1"]
+[ext_resource type="PackedScene" uid="uid://c6uk23j2qyt6" path="res://blends/coin.blend" id="5_4a8w4"]
+[ext_resource type="Script" path="res://objects/coin.gd" id="6_tkk7t"]
+
+[sub_resource type="Environment" id="Environment_6gofu"]
+background_mode = 2
+ssr_enabled = true
+sdfgi_enabled = true
 
 [node name="Level1" type="Node3D"]
 
-[node name="Player" parent="." instance=ExtResource("1_nu457")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.22805, 4.12368, 0)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6gofu")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.708991, -0.485581, 0.511414, -0.00838805, 0.719327, 0.694621, -0.705168, -0.496769, 0.505923, 0, 0, 0)
+transform = Transform3D(0.708991, -0.485581, 0.511413, -0.00838805, 0.719327, 0.694621, -0.705168, -0.49677, 0.505923, 0, 0, 0)
+light_color = Color(1, 0.611765, 0.490196, 1)
 shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_nu457")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.22805, 4.12368, 0)
 
 [node name="Terrain3D" type="Terrain3D" parent="."]
 storage = ExtResource("2_lchtv")
 material = ExtResource("3_u4vfc")
 texture_list = ExtResource("4_x0cy1")
+
+[node name="coin" parent="." instance=ExtResource("5_4a8w4")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 6.07773, 1.51194, -7.01659)
+script = ExtResource("6_tkk7t")
