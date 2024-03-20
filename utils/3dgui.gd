@@ -1,9 +1,4 @@
-extends Node
-
-var save = {"player": {"coins": 0}}
-
-
-var Player # Set by the player when added to tree
+extends SubViewport
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,7 +7,5 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-	#pass
-
-
+func _process(delta):
+	pass

@@ -14,5 +14,10 @@ static func get_coins():
 
 static func add_coins(add_amount: int):
 	Main.save.player.coins += add_amount
+	
+	coin_anim(add_amount)
+	
 	return get_coins()
 
+static func coin_anim(coin_amount):
+	pass

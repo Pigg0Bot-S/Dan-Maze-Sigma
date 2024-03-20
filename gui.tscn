@@ -1,10 +1,48 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmn2jwm3hjwiy"]
+[gd_scene load_steps=7 format=3 uid="uid://dmn2jwm3hjwiy"]
 
+[ext_resource type="Script" path="res://utils/3dgui.gd" id="1_j146g"]
 [ext_resource type="PackedScene" uid="uid://c6uk23j2qyt6" path="res://blends/coin.blend" id="1_mmk1m"]
 [ext_resource type="Script" path="res://objects/coin_spin.gd" id="2_5lyft"]
 
+[sub_resource type="Animation" id="Animation_e3k1d"]
+resource_name = "reveal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("coin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-3.63959, 1.84821, -2.56409), Vector3(-3.63959, 2.59613, -2.56409)]
+}
+
+[sub_resource type="Animation" id="Animation_jgxa1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("coin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-3.63959, 1.84821, -2.56409)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8dj2l"]
+_data = {
+"RESET": SubResource("Animation_jgxa1"),
+"reveal": SubResource("Animation_e3k1d")
+}
+
 [node name="GUI" type="SubViewport"]
 size = Vector2i(852, 480)
+script = ExtResource("1_j146g")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 projection = 1
@@ -18,3 +56,8 @@ script = ExtResource("2_5lyft")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 sky_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8dj2l")
+}

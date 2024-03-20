@@ -20,6 +20,7 @@ var direction : Vector3 = Vector3(0, 0, 0)
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Main.Player = self
 	
 	sensitivity_multiplier = Vector2(DisplayServer.window_get_size())/Vector2(852, 480)
 
