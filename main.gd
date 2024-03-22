@@ -1,5 +1,9 @@
 extends Node
 
+signal coin_set(amount : int)
+signal coin_animation(amount : int)
+
+
 var save = {"player": {"coins": 0}}
 
 

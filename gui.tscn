@@ -1,37 +1,39 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmn2jwm3hjwiy"]
+[gd_scene load_steps=9 format=3 uid="uid://dmn2jwm3hjwiy"]
 
 [ext_resource type="Script" path="res://utils/3dgui.gd" id="1_j146g"]
 [ext_resource type="PackedScene" uid="uid://c6uk23j2qyt6" path="res://blends/coin.blend" id="1_mmk1m"]
 [ext_resource type="Script" path="res://objects/coin_spin.gd" id="2_5lyft"]
-
-[sub_resource type="Animation" id="Animation_e3k1d"]
-resource_name = "reveal"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("coin:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-3.63959, 1.84821, -2.56409), Vector3(-3.63959, 2.59613, -2.56409)]
-}
+[ext_resource type="ArrayMesh" uid="uid://bbgxka3vo22ro" path="res://blends/coin.tres" id="4_ai5fe"]
 
 [sub_resource type="Animation" id="Animation_jgxa1"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("coin:position")
+tracks/0/path = NodePath("CoinStuff:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-3.63959, 1.84821, -2.56409)]
+"values": [Vector3(-3.63959, 2.59613, -2.56409)]
+}
+
+[sub_resource type="Animation" id="Animation_e3k1d"]
+resource_name = "reveal"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoinStuff:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-3.63959, 2.59613, -2.56409), Vector3(-3.63959, 1.90901, -2.56409)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8dj2l"]
@@ -39,6 +41,13 @@ _data = {
 "RESET": SubResource("Animation_jgxa1"),
 "reveal": SubResource("Animation_e3k1d")
 }
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0a17o"]
+angular_velocity_min = 720.0
+angular_velocity_max = 720.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_min = 0.1
+scale_max = 0.1
 
 [node name="GUI" type="SubViewport"]
 size = Vector2i(852, 480)
@@ -50,9 +59,20 @@ fov = 90.0
 size = 4.42
 far = 50.0
 
-[node name="coin" parent="." instance=ExtResource("1_mmk1m")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -3.63959, 1.84821, -2.56409)
+[node name="CoinStuff" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.63959, 2.59613, -2.56409)
+
+[node name="Coin" parent="CoinStuff" instance=ExtResource("1_mmk1m")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 script = ExtResource("2_5lyft")
+
+[node name="CoinCount" type="Label3D" parent="CoinStuff"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.219692, 0, 0)
+text = "13"
+
+[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="CoinStuff"]
+transform = Transform3D(8.52, 0, 0, 0, 5.25, 0, 0, 0, 1, 0, 0, 0)
+strength = 36.34
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 sky_mode = 1
@@ -61,3 +81,10 @@ sky_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_8dj2l")
 }
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.03383, -2.4072, -2.564)
+amount = 32
+lifetime = 2.61
+process_material = SubResource("ParticleProcessMaterial_0a17o")
+draw_pass_1 = ExtResource("4_ai5fe")

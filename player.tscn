@@ -26,11 +26,11 @@ shape = SubResource("CylinderShape3D_rp0ga")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.698096, 0)
 current = true
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="3DHudContainer" type="SubViewportContainer" parent="."]
+offset_right = 852.0
+offset_bottom = 480.0
 
-[node name="GUI" parent="SubViewportContainer" instance=ExtResource("2_0t1nb")]
+[node name="3DHud" parent="3DHudContainer" instance=ExtResource("2_0t1nb")]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
