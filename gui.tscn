@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmn2jwm3hjwiy"]
+[gd_scene load_steps=12 format=3 uid="uid://dmn2jwm3hjwiy"]
 
 [ext_resource type="Script" path="res://utils/3dgui.gd" id="1_j146g"]
 [ext_resource type="PackedScene" uid="uid://c6uk23j2qyt6" path="res://blends/coin.blend" id="1_mmk1m"]
 [ext_resource type="Script" path="res://objects/coin_spin.gd" id="2_5lyft"]
 [ext_resource type="ArrayMesh" uid="uid://bbgxka3vo22ro" path="res://blends/coin.tres" id="4_ai5fe"]
+[ext_resource type="AudioStream" uid="uid://c6m58ykn3u2uc" path="res://assets/sfx/coin/coin1.wav" id="5_qcvuh"]
 
 [sub_resource type="Animation" id="Animation_jgxa1"]
 length = 0.001
@@ -42,18 +43,32 @@ _data = {
 "reveal": SubResource("Animation_e3k1d")
 }
 
+[sub_resource type="Curve" id="Curve_ji4fp"]
+_data = [Vector2(0, 0), 0.0, 0.713234, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1odll"]
+curve = SubResource("Curve_ji4fp")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0a17o"]
-angular_velocity_min = 720.0
-angular_velocity_max = 720.0
+particle_flag_disable_z = true
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+tangential_accel_min = -4.0
+tangential_accel_max = 1.54
 scale_min = 0.1
 scale_max = 0.1
+turbulence_noise_speed = Vector3(-1, 2, 2.08165e-12)
+turbulence_influence_min = 0.05
+turbulence_influence_max = 0.2
+turbulence_influence_over_life = SubResource("CurveTexture_1odll")
+collision_mode = 2
 
 [node name="GUI" type="SubViewport"]
 size = Vector2i(852, 480)
 script = ExtResource("1_j146g")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.970493)
 projection = 1
 fov = 90.0
 size = 4.42
@@ -71,10 +86,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.219692, 0, 0)
 text = "13"
 
 [node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="CoinStuff"]
-transform = Transform3D(8.52, 0, 0, 0, 5.25, 0, 0, 0, 1, 0, 0, 0)
-strength = 36.34
+transform = Transform3D(8.52, 0, 0, 0, 5.25, 0, 0, 0, 1, 0, 0, 2.35936)
+strength = 57.44
+attenuation = 0.659757
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+light_energy = 2.0
 sky_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -83,8 +100,13 @@ libraries = {
 }
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.03383, -2.4072, -2.564)
-amount = 32
-lifetime = 2.61
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.034, -2.407, 2.08165e-12)
+emitting = false
+amount = 100
+lifetime = 0.98
 process_material = SubResource("ParticleProcessMaterial_0a17o")
 draw_pass_1 = ExtResource("4_ai5fe")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_qcvuh")
+max_polyphony = 100

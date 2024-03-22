@@ -20,4 +20,4 @@ static func add_coins(add_amount: int):
 	return get_coins()
 
 static func coin_anim(coin_amount):
-	pass
+	Main.coin_animation.emit(coin_amount)
